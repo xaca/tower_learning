@@ -7,6 +7,7 @@ public class Bala : MonoBehaviour {
     private float velocidad;
     private Vector3 posicion_muerte_enemigo;
     private bool disparada;
+
 	// Use this for initialization
 	void Start () {
         velocidad = 2;

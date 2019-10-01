@@ -17,6 +17,7 @@ public class Unidad : MonoBehaviour {
     private int vidas;
     private Vector3 posicion_muerte;
     private Animator controlador;
+    private LogicaBarra lb;
 
     // Use this for initialization
     void Start () {
@@ -27,6 +28,7 @@ public class Unidad : MonoBehaviour {
         posicion_inicial = this.transform.position;
         posicion_siguiente = ruta.transform.GetChild(0);
         controlador = this.GetComponent<Animator>();
+        lb = this.GetComponent<LogicaBarra>();
     }
 	
 	// Update is called once per frame
@@ -105,6 +107,10 @@ public class Unidad : MonoBehaviour {
                 {
                     esta_viva = false;
                     Debug.Log("Se murio la unidad");
+                }
+                else
+                {
+                    lb.ModificarBarra(.5f);
                 }
                
             }
