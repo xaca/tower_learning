@@ -25,7 +25,7 @@ public class Torre : MonoBehaviour {
         }
         else
         {
-            tiempo_disparo -= .1f;
+            tiempo_disparo -= Time.deltaTime;
         }
 	}
 
