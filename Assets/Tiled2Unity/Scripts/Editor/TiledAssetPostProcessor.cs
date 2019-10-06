@@ -217,7 +217,7 @@ namespace Tiled2Unity
             // Put some dummy UserData on the importer so we know not to apply these settings again.
             this.assetImporter.userData = "tiled2unity";
 
-            TextureImporter textureImporter = this.assetImporter as TextureImporter;
+            /*TextureImporter textureImporter = this.assetImporter as TextureImporter;
             textureImporter.textureType = TextureImporterType.Default;
             textureImporter.npotScale = TextureImporterNPOTScale.None;
             textureImporter.convertToNormalmap = false;
@@ -230,7 +230,7 @@ namespace Tiled2Unity
             textureImporter.generateCubemap = TextureImporterGenerateCubemap.None;
             textureImporter.filterMode = FilterMode.Point;
             textureImporter.wrapMode = TextureWrapMode.Clamp;
-            textureImporter.textureFormat = TextureImporterFormat.AutomaticTruecolor;
+            textureImporter.textureFormat = TextureImporterFormat.AutomaticTruecolor;*/
         }
 
     }

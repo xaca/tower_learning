@@ -18,9 +18,7 @@ public class LogicaBarra : MonoBehaviour {
     {
         if (sr.transform.localScale.x > 0)
         {
-            sr.transform.localScale -= new Vector3(escala, 0);
-            barra_verde.transform.position = transform.position - new Vector3(.3f - sr.bounds.size.x / 2, -.4f);
-            barra_roja.transform.position = transform.position - new Vector3(.05f, -.4f);
+            sr.transform.localScale -= new Vector3(escala, 0);            
         }
         else
         {

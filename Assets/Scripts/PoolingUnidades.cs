@@ -12,6 +12,7 @@ public class PoolingUnidades : MonoBehaviour {
         Vector3 incremento = new Vector3(0, 1);
         Vector3 posicion_actual = unidad.transform.position;
         unidades = new ArrayList();
+        unidades.Add(unidad);
 
         for (int i = 0; i < 10; i++)
         {

@@ -10,11 +10,13 @@ public class Unidad : MonoBehaviour {
     private Vector2 posicion_inicial;
     private Transform posicion_siguiente;
     private Transform posicion_actual;
+    [SerializeField]
     private float vel;
     private float distancia_punto;
     private bool esta_viva;
     private float tiempo;
     private int vidas;
+    private float delta_vida;
     private Vector3 posicion_muerte;
     private Animator controlador;
     private LogicaBarra lb;
@@ -22,13 +24,14 @@ public class Unidad : MonoBehaviour {
     // Use this for initialization
     void Start () {
         vel = 1f;
-        vidas = 3;
+        vidas = 5;
+        delta_vida = 1f / vidas;
         distancia_punto = .1f;
         esta_viva = true;
         posicion_inicial = this.transform.position;
         posicion_siguiente = ruta.transform.GetChild(0);
         controlador = this.GetComponent<Animator>();
-        lb = this.GetComponent<LogicaBarra>();
+        lb = this.GetComponent<LogicaBarra>();        
     }
 	
 	// Update is called once per frame
@@ -96,21 +99,24 @@ public class Unidad : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D otro)
     {
+        Bala bala;
+
         if (vidas > 0)
         {
             if (otro.gameObject.tag == "bala")
             {
                 //Pendiente poner pooling para las balas
-                Destroy(otro.gameObject);
-                vidas--;
-                if(vidas==0)
+                bala = otro.gameObject.GetComponent<Bala>();
+                bala.Disparada = false;
+
+                if(--vidas==0)
                 {
                     esta_viva = false;
                     Debug.Log("Se murio la unidad");
                 }
                 else
                 {
-                    lb.ModificarBarra(.5f);
+                    lb.ModificarBarra(delta_vida);
                 }
                
             }
