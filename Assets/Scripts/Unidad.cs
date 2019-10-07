@@ -15,6 +15,7 @@ public class Unidad : MonoBehaviour {
     private float distancia_punto;
     private bool esta_viva;
     private float tiempo;
+    [SerializeField]
     private int vidas;
     private float delta_vida;
     private Vector3 posicion_muerte;
@@ -24,7 +25,6 @@ public class Unidad : MonoBehaviour {
     // Use this for initialization
     void Start () {
         vel = 1f;
-        vidas = 5;
         delta_vida = 1f / vidas;
         distancia_punto = .1f;
         esta_viva = true;
