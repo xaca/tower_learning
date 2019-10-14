@@ -6,17 +6,19 @@ public class Unidad : MonoBehaviour {
 
     [SerializeField]
     private GameObject ruta;
+    [SerializeField]
+    private float vel;
+    [SerializeField]
+    private int vidas;
+    [SerializeField]
+    private int valor_muerte;
     private int indice;
     private Vector2 posicion_inicial;
     private Transform posicion_siguiente;
     private Transform posicion_actual;
-    [SerializeField]
-    private float vel;
     private float distancia_punto;
     private bool esta_viva;
     private float tiempo;
-    [SerializeField]
-    private int vidas;
     private float delta_vida;
     private Vector3 posicion_muerte;
     private Animator controlador;
@@ -31,7 +33,8 @@ public class Unidad : MonoBehaviour {
         posicion_inicial = this.transform.position;
         posicion_siguiente = ruta.transform.GetChild(0);
         controlador = this.GetComponent<Animator>();
-        lb = this.GetComponent<LogicaBarra>();        
+        lb = this.GetComponent<LogicaBarra>();
+        
     }
 	
 	// Update is called once per frame
@@ -112,7 +115,7 @@ public class Unidad : MonoBehaviour {
                 if(--vidas==0)
                 {
                     esta_viva = false;
-                    Debug.Log("Se murio la unidad");
+                    Hud.ActualizarMoneda(valor_muerte);
                 }
                 else
                 {
