@@ -61,6 +61,7 @@ public class Unidad : MonoBehaviour {
                         transform.position = posicion_inicial;
                         posicion_siguiente = ruta.transform.GetChild(0);
                         posicion_actual = null;
+                        
                     }                
                 }                                    
         }
