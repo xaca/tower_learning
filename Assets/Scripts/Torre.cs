@@ -8,12 +8,18 @@ public class Torre : MonoBehaviour,IControlable {
     private float distancia_umbral;
     private float tiempo_disparo;
     private GameObject[] balas;
+    private int valor_nivel_actual;
+
+    public Torre()
+    {
+        Valor_nivel_actual = 150;
+    }
 
     // Use this for initialization
     void Start () {
         distancia_umbral = 1.5f;
         tiempo_disparo = .8f;
-        CrearBalas(5);
+        CrearBalas(5);        
     }
 	
 	// Update is called once per frame
@@ -88,7 +94,7 @@ public class Torre : MonoBehaviour,IControlable {
 
     public bool EsActualizable()
     {
-        return Hud.EstadoActual(Hud.ID_TORRE);
+        return Hud.GetInstance().EstadoActual(Hud.ID_TORRE);
     }
 
     public bool Esta_activa
@@ -114,6 +120,19 @@ public class Torre : MonoBehaviour,IControlable {
         set
         {
             enemigo = value;
+        }
+    }
+
+    public int Valor_nivel_actual
+    {
+        get
+        {
+            return valor_nivel_actual;
+        }
+
+        set
+        {
+            valor_nivel_actual = value;
         }
     }
 }

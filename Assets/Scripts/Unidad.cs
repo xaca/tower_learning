@@ -118,7 +118,7 @@ public class Unidad : MonoBehaviour, IControlable {
                 if(--vidas==0)
                 {
                     esta_viva = false;
-                    Hud.ActualizarMoneda(valor_muerte);
+                    Hud.GetInstance().ActualizarMoneda(valor_muerte);
                 }
                 else
                 {
@@ -132,7 +132,7 @@ public class Unidad : MonoBehaviour, IControlable {
 
     public bool EsActualizable()
     {
-        return Hud.EstadoActual(Hud.ID_UNIDAD);
+        return Hud.GetInstance().EstadoActual(Hud.ID_UNIDAD);
     }
 
     public bool Esta_viva
