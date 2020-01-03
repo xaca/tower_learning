@@ -8,7 +8,7 @@ public class ActualizarTorre : MonoBehaviour {
     private Animator estados;
 
 	// Use this for initialization
-	void Start () {
+	void Start () {       
         ct = this.GetComponentInParent<ControlesTorre>();
         estados = this.GetComponentInParent<Animator>();
 	}

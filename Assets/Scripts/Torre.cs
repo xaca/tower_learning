@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Torre : MonoBehaviour,IControlable {
+public class Torre : MonoBehaviour {
 
     private GameObject enemigo;
     private bool esta_activa;
@@ -24,23 +24,19 @@ public class Torre : MonoBehaviour,IControlable {
 	
 	// Update is called once per frame
 	void Update () {
-        
-        if(EsActualizable())
+               
+        Enemigo = BuscarEnemigoCercano();
+        if(Enemigo!=null && tiempo_disparo <= 0)
         {
-            Enemigo = BuscarEnemigoCercano();
-            if(Enemigo!=null && tiempo_disparo <= 0)
-            {
-                Disparar();
-                Debug.DrawLine(this.transform.position, enemigo.transform.position, Color.yellow);
-                tiempo_disparo = 1f;
-            }
-            else
-            {
-                tiempo_disparo -= Time.deltaTime;
-            }
+            Disparar();
+            Debug.DrawLine(this.transform.position, enemigo.transform.position, Color.yellow);
+            tiempo_disparo = 1f;
         }
-
-        
+        else
+        {
+            tiempo_disparo -= Time.deltaTime;
+        }
+                
     }
 
     private void CrearBalas(int total_balas)
@@ -91,12 +87,7 @@ public class Torre : MonoBehaviour,IControlable {
         }
         return null;
     }
-
-    public bool EsActualizable()
-    {
-        return Hud.GetInstance().EstadoActual(Hud.ID_TORRE);
-    }
-
+        
     public bool Esta_activa
     {
         get

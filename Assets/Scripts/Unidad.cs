@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class Unidad : MonoBehaviour, IControlable {
+public class Unidad : MonoBehaviour {
 
     [SerializeField]
     private GameObject ruta;
@@ -38,40 +38,38 @@ public class Unidad : MonoBehaviour, IControlable {
 	
 	// Update is called once per frame
 	void Update () {
+        
+        if (esta_viva)
+        {                
+                //dir = posicion_siguiente.position - this.transform.position;
+                //dir.z = 0;
+                transform.position = Vector2.MoveTowards(transform.position, posicion_siguiente.position, vel * Time.deltaTime);
 
-        if(EsActualizable())
-        {
-            if (esta_viva)
-            {                
-                    //dir = posicion_siguiente.position - this.transform.position;
-                    //dir.z = 0;
-                    transform.position = Vector2.MoveTowards(transform.position, posicion_siguiente.position, vel * Time.deltaTime);
-
-                    if (Vector2.Distance(transform.position,posicion_siguiente.position)<distancia_punto)
+                if (Vector2.Distance(transform.position,posicion_siguiente.position)<distancia_punto)
+                {
+                    if (indice + 1 < ruta.transform.childCount)
                     {
-                        if (indice + 1 < ruta.transform.childCount)
-                        {
-                            indice++;
-                            posicion_actual = posicion_siguiente;
-                            posicion_siguiente = ruta.transform.GetChild(indice);
-                            CambiarPosicion();                            
-                        }
-                        else
-                        {
-                            indice = 0;
-                            transform.position = posicion_inicial;
-                            posicion_siguiente = ruta.transform.GetChild(0);
-                            posicion_actual = null;
+                        indice++;
+                        posicion_actual = posicion_siguiente;
+                        posicion_siguiente = ruta.transform.GetChild(indice);
+                        CambiarPosicion();                            
+                    }
+                    else
+                    {
+                        indice = 0;
+                        transform.position = posicion_inicial;
+                        posicion_siguiente = ruta.transform.GetChild(0);
+                        posicion_actual = null;
                         
-                        }                
-                    }                                    
-            }
-            else
-            {
-                Posicion_muerte = this.transform.position;
-                this.transform.position = posicion_inicial;
-            }
+                    }                
+                }                                    
         }
+        else
+        {
+            Posicion_muerte = this.transform.position;
+            this.transform.position = posicion_inicial;
+        }
+        
 	}
 
     private void CambiarPosicion()
@@ -118,7 +116,7 @@ public class Unidad : MonoBehaviour, IControlable {
                 if(--vidas==0)
                 {
                     esta_viva = false;
-                    Hud.GetInstance().ActualizarMoneda(valor_muerte);
+                    //Hud.GetInstance().ActualizarMoneda(valor_muerte);
                 }
                 else
                 {
@@ -128,12 +126,7 @@ public class Unidad : MonoBehaviour, IControlable {
             }
         }
        
-    }
-
-    public bool EsActualizable()
-    {
-        return Hud.GetInstance().EstadoActual(Hud.ID_UNIDAD);
-    }
+    }    
 
     public bool Esta_viva
     {

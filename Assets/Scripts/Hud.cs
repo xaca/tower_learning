@@ -11,10 +11,7 @@ public class Hud : MonoBehaviour {
     [SerializeField]
     private Text monedas;
     private int contador_monedas;
-    private bool modo_construccion;
 
-    public const int ID_TORRE = 1;
-    public const int ID_UNIDAD = 2;
     
     public static Hud GetInstance()
     {
@@ -37,29 +34,8 @@ public class Hud : MonoBehaviour {
 
     private void Start()
     {
-        modo_construccion = true;
         Contador_monedas = 1000;
         instancia = this;
-    }
-
-    public bool EstadoActual(int identificador)
-    {
-        if(identificador == ID_TORRE)
-        {
-            return !modo_construccion;
-        }
-
-        if(identificador == ID_UNIDAD)
-        {
-            return !modo_construccion;
-        }
-
-        return false;
-    }
-
-    public void CambiarModoConstruccion(bool valor)
-    {
-        modo_construccion = valor;
     }
 
     public void ActualizarMoneda(int valor)

@@ -8,7 +8,7 @@ public class LogicaPonerTorre : MonoBehaviour {
     private Torre torre;
     private Hud hud;
 
-	void OnMouseDown()
+    void OnMouseDown()
     {
         GameObject temp;
         Vector3 pos = this.transform.position;
