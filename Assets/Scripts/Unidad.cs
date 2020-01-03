@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 
-public class Unidad : MonoBehaviour {
+public class Unidad : MonoBehaviour,IControlable {
 
     [SerializeField]
     private GameObject ruta;
@@ -23,6 +23,8 @@ public class Unidad : MonoBehaviour {
     private Vector3 posicion_muerte;
     private Animator controlador;
     private LogicaBarra lb;
+    private Hud hud;
+
 
     // Use this for initialization
     void Start () {
@@ -33,41 +35,45 @@ public class Unidad : MonoBehaviour {
         posicion_inicial = this.transform.position;
         posicion_siguiente = ruta.transform.GetChild(0);
         controlador = this.GetComponent<Animator>();
-        lb = this.GetComponent<LogicaBarra>();        
+        lb = this.GetComponent<LogicaBarra>();
+        hud = Hud.GetInstance();
     }
 	
 	// Update is called once per frame
 	void Update () {
         
-        if (esta_viva)
-        {                
-                //dir = posicion_siguiente.position - this.transform.position;
-                //dir.z = 0;
-                transform.position = Vector2.MoveTowards(transform.position, posicion_siguiente.position, vel * Time.deltaTime);
-
-                if (Vector2.Distance(transform.position,posicion_siguiente.position)<distancia_punto)
-                {
-                    if (indice + 1 < ruta.transform.childCount)
-                    {
-                        indice++;
-                        posicion_actual = posicion_siguiente;
-                        posicion_siguiente = ruta.transform.GetChild(indice);
-                        CambiarPosicion();                            
-                    }
-                    else
-                    {
-                        indice = 0;
-                        transform.position = posicion_inicial;
-                        posicion_siguiente = ruta.transform.GetChild(0);
-                        posicion_actual = null;
-                        
-                    }                
-                }                                    
-        }
-        else
+        if(EsActualizable())
         {
-            Posicion_muerte = this.transform.position;
-            this.transform.position = posicion_inicial;
+            if (esta_viva)
+            {                
+                    //dir = posicion_siguiente.position - this.transform.position;
+                    //dir.z = 0;
+                    transform.position = Vector2.MoveTowards(transform.position, posicion_siguiente.position, vel * Time.deltaTime);
+
+                    if (Vector2.Distance(transform.position,posicion_siguiente.position)<distancia_punto)
+                    {
+                        if (indice + 1 < ruta.transform.childCount)
+                        {
+                            indice++;
+                            posicion_actual = posicion_siguiente;
+                            posicion_siguiente = ruta.transform.GetChild(indice);
+                            CambiarPosicion();                            
+                        }
+                        else
+                        {
+                            indice = 0;
+                            transform.position = posicion_inicial;
+                            posicion_siguiente = ruta.transform.GetChild(0);
+                            posicion_actual = null;
+                        
+                        }                
+                    }                                    
+            }
+            else
+            {
+                Posicion_muerte = this.transform.position;
+                this.transform.position = posicion_inicial;
+            }
         }
         
 	}
@@ -116,7 +122,7 @@ public class Unidad : MonoBehaviour {
                 if(--vidas==0)
                 {
                     esta_viva = false;
-                    //Hud.GetInstance().ActualizarMoneda(valor_muerte);
+                    hud.ActualizarMoneda(valor_muerte);
                 }
                 else
                 {
@@ -126,7 +132,12 @@ public class Unidad : MonoBehaviour {
             }
         }
        
-    }    
+    }
+
+    public bool EsActualizable()
+    {
+        return hud.Modo_ejecucion == Hud.EJECUCION;
+    }
 
     public bool Esta_viva
     {

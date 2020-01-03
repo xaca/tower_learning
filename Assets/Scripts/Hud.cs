@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +11,11 @@ public class Hud : MonoBehaviour {
     [SerializeField]
     private Text monedas;
     private int contador_monedas;
+    private uint modo_ejecucion;
 
-    
+    public const uint CONSTRUCCION = 1;
+    public const uint EJECUCION = 2;
+
     public static Hud GetInstance()
     {
 
@@ -32,8 +35,22 @@ public class Hud : MonoBehaviour {
         }
     }
 
+    public uint Modo_ejecucion
+    {
+        get
+        {
+            return modo_ejecucion;
+        }
+
+        set
+        {
+            modo_ejecucion = value;
+        }
+    }
+
     private void Start()
     {
+        modo_ejecucion = CONSTRUCCION;
         Contador_monedas = 1000;
         instancia = this;
     }
