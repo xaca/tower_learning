@@ -64,8 +64,7 @@ public class Unidad : MonoBehaviour,IControlable {
                             indice = 0;
                             transform.position = posicion_inicial;
                             posicion_siguiente = ruta.transform.GetChild(0);
-                            posicion_actual = null;
-                        
+                            posicion_actual = null;                            
                         }                
                     }                                    
             }
@@ -123,6 +122,7 @@ public class Unidad : MonoBehaviour,IControlable {
                 {
                     esta_viva = false;
                     hud.ActualizarMoneda(valor_muerte);
+                    hud.DescontarVidas();
                 }
                 else
                 {

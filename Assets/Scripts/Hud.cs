@@ -10,7 +10,10 @@ public class Hud : MonoBehaviour {
 
     [SerializeField]
     private Text monedas;
+    [SerializeField]
+    private Text vidas;
     private int contador_monedas;
+    private int contador_vidas;
     private uint modo_ejecucion;
 
     public const uint CONSTRUCCION = 1;
@@ -52,6 +55,7 @@ public class Hud : MonoBehaviour {
     {
         modo_ejecucion = CONSTRUCCION;
         Contador_monedas = 1000;
+        contador_vidas = 20;
         instancia = this;
     }
 
@@ -63,12 +67,25 @@ public class Hud : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         monedas.text = Contador_monedas.ToString();
+        vidas.text = contador_vidas.ToString();
 	}
 
     public void DescontarSaldo(int valor)
     {
         contador_monedas -= valor;
         StartCoroutine("CambiarColorSaldo", Color.black);
+    }
+
+    public void DescontarVidas()
+    {
+        if(contador_vidas-1 >0)
+        {
+            contador_vidas--;
+        }
+        else
+        {
+            //Juego termina, pendiente control de fin de partida
+        }
     }
 
     public void ErrorSaldoInsuficiente()
