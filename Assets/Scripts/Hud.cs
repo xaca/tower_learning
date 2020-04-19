@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class Hud : MonoBehaviour {
 
     private static Hud instancia;
-
+    [SerializeField]
+    private Canvas ventana_invasion;
     [SerializeField]
     private Text monedas;
     [SerializeField]
@@ -55,8 +56,9 @@ public class Hud : MonoBehaviour {
     {
         modo_ejecucion = CONSTRUCCION;
         Contador_monedas = 1000;
-        contador_vidas = 20;
+        contador_vidas = 2;
         instancia = this;
+        ventana_invasion.enabled = false;
     }
 
     public void ActualizarMoneda(int valor)
@@ -77,14 +79,17 @@ public class Hud : MonoBehaviour {
     }
 
     public void DescontarVidas()
-    {
-        if(contador_vidas-1 >0)
+    {        
+        if(contador_vidas-1>0)
         {
             contador_vidas--;
         }
         else
         {
             //Juego termina, pendiente control de fin de partida
+            ventana_invasion.enabled = true;
+            Time.timeScale = 0;
+            Debug.Log("Perdio");
         }
     }
 
