@@ -4,4 +4,4 @@ Juego de tower defense, inspirado en kingdom rush. Utilizado en la materia de pr
 
 ## Recuersos
 
-- (https://www.sitepoint.com/adding-pause-main-menu-and-game-over-screens-in-unity/)[Tutorial menú]
+- [Tutorial menú](https://www.sitepoint.com/adding-pause-main-menu-and-game-over-screens-in-unity/)
