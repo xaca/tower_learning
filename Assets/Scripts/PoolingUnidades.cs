@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PoolingUnidades : MonoBehaviour {
@@ -9,12 +9,14 @@ public class PoolingUnidades : MonoBehaviour {
 	void Start () {
         GameObject unidad = GameObject.Find("unidad_01");
         GameObject unidad2 = GameObject.Find("unidad_02");
+        GameObject unidad3 = GameObject.Find("unidad_03");
         GameObject temp;
         Vector3 incremento = new Vector3(0, 1);
         Vector3 posicion_actual = unidad.transform.position;
         unidades = new ArrayList();
         unidades.Add(unidad);
         unidades.Add(unidad2);
+        unidades.Add(unidad3);
 
         for (int i = 0; i < 10; i++)
         {
