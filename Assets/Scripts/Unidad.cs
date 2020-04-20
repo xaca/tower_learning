@@ -36,11 +36,11 @@ public class Unidad : MonoBehaviour,IControlable {
         posicion_siguiente = ruta.transform.GetChild(0);
         controlador = this.GetComponent<Animator>();
         lb = this.GetComponent<LogicaBarra>();
-        hud = Hud.GetInstance();
     }
-	
+	 
 	// Update is called once per frame
 	void Update () {
+        hud = Hud.GetInstance();        
         
         if(EsActualizable())
         {
@@ -135,7 +135,7 @@ public class Unidad : MonoBehaviour,IControlable {
     }
 
     public bool EsActualizable()
-    {
+    {        
         return hud.Modo_ejecucion == Hud.EJECUCION;
     }
 
