@@ -22,7 +22,6 @@ public class Hud : MonoBehaviour {
 
     public static Hud GetInstance()
     {
-
         return instancia;
     }
 
@@ -52,14 +51,23 @@ public class Hud : MonoBehaviour {
         }
     }
 
-    private void Start()
+    void Start()
     {
         modo_ejecucion = CONSTRUCCION;
         Contador_monedas = 1000;
-        contador_vidas = 2;
+        contador_vidas = 20;
         instancia = this;
-        ventana_invasion.enabled = false;
+        ventana_invasion.enabled = false;                
     }
+
+    /*
+    void Awake()
+    {
+        if (instancia == null)
+            instancia = this;
+        else if (instancia != null)
+            Destroy(gameObject);
+    }*/
 
     public void ActualizarMoneda(int valor)
     {
